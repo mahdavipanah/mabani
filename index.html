@@ -105,6 +105,7 @@
     <a class="item" href="#removeAllCharFunction">تابع حدف کاراکتر از رشته</a>
     <a class="item" href="#arraySelectionSortFunction">تابع مرتب سازی انتخابی آرایه</a>
     <a class="item" href="#stringToUIntFunction">تابع تبدیل رشته به عدد طبیعی</a>
+    <a class="item" href="#stringToIntFunction">تابع تبدیل رشته به عدد صحیح</a>
   </div>
 
     <h4 id="isPrime" class="ui right aligned attached header">
@@ -579,6 +580,7 @@
         </code>
       </pre>
     </div>
+
     <h4 id="stringToUIntFunction" class="ui right aligned attached header">
       <span class="custom-font">
         تابع تبدیل رشته به عدد طبیعی
@@ -596,6 +598,38 @@
               for (int i = 0, j = strlen(str) - 1; str[i];
                   i++, j--)
                   ret_val += pow(10, j) * (str[i] - 48);
+              return ret_val;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="stringToIntFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع تبدیل رشته به عدد صحیح
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          #include &lt;math.h&gt;
+          #include &lt;string.h&gt;
+
+          // Defined in above examples
+          unsigned int str_to_uint(const char *);
+
+          // String must contain numeric characters (1...9)
+          // and can have '-' or '+' as the first character
+          int str_to_int(const char * str) {
+              int ret_val = 0;
+              int has_sign = 0, is_positive = 1;
+              if (str[0] == '-' || str[0] == '+')
+                has_sign = 1;
+              if (str[0] == '-')
+                is_positive = 0;
+              ret_val = str_to_uint(has_sign ? str + 1 : str);
+              if (!is_positive)
+                ret_val *= -1;
               return ret_val;
           }
         </code>
