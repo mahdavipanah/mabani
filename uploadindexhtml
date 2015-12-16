@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Read FTP server username
+read -p "FTP username: " ftpusername
+# Read FTP server password
+read -s -p "FTP password: " ftppassword
+# Upload (Update) index.html file to the server with the given username and password
+curl -T index.html -u $ftpusername:$ftppassword ftp://ftp.mahdavipanah.com/mabani/index.html
