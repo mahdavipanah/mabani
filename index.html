@@ -1,0 +1,600 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>مثالهای مبانی‌ برنامه‌نویسی با زبان سی</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta content="مثالهای مبانی‌ برنامه‌نویسی با زبان سی" name="description" />
+  <meta content="برنامه‌نویسی,سی,الگوریتم,زبان برنامه نویسی سی,برنامه نویسی,الگوریتم در زبان سی,مبانی برنامه نویسی,مبانی کامپیوتر" name="keywords" />
+  <meta name="author" content="حمیدرضا مهدوی پناه">
+  <link rel="stylesheet" href="css/semantic.min.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="js/semantic.min.js"></script>
+  <link rel="stylesheet" href="css/highlights/styles/tomorrow.css">
+  <script src="js/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  <style type="text/css">
+    @font-face {
+      font-family: 'customFont';
+      src: url(fonts/Mirza.woff);
+    }
+
+    @font-face {
+      font-family: 'customFont';
+      src: url(fonts/Mirza-Bold.woff);
+      font-weight: bold;
+    }
+
+    .custom-font {
+      font-family: 'customFont';
+    }
+
+    body {
+      background-color: #FFFFFF;
+    }
+
+    .main.container {
+      margin-top: 7em;
+    }
+
+    .wireframe {
+      margin-top: 2em;
+    }
+
+    .ui.footer.segment {
+      margin: 5em 0em 0em;
+      padding: 5em 0em;
+    }
+    pre {
+      margin: 0px;
+    }
+    code {
+      padding: 0px;
+    }
+    .ui.attached.code.segment {
+      padding: 0px;
+    }
+    #examplesMenu > a.item {
+      text-align: right;
+      font-family: customFont;
+    }
+    .ui.bottom.vertical.attached.menu {
+      width: calc(100% + 2px);
+    }
+    .ui.attached:not(.top):not(.bottom).header {
+      background-color: #F7FFF1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="custom-font ui text top attached container">
+    <div id="intro" class="ui top attached right aligned segment" style="border-radius: 0px;">
+      <span class="custom-font">
+        !سلام  <br>
+        سعی کردم یه سری از الگوریتم&zwnj;های پایه&zwnj;ای که معمولا در درس مبانی برنامه&zwnj;نویسی مطرح میشه رو در قالب کدهایی با زبان سی در این صفحه گردآوری کنم
+        <br>
+        اگه اشتباهی در کد&zwnj;ها پیدا کردید، مثالی هست که فکر میکنید ننوشتم و یا پیشنهادی داشتید و یا صرفا برای فرستادن اسپم :) میتونید با ایمیل زیر در تماس باشید
+        &zwnj;&zwnj;&zwnj;&zwnj;<br>
+        h.mahdavipanah@gmail.com
+    </span>
+    </div>
+  <div id="examplesMenu" class="ui bottom vertical attached menu" style="
+">
+    <a class="item" href="#isPrime">تشخیص عدد اول</a>
+    <a class="item" href="#isPrimeFunction">تابع بررسی اول بودن عدد</a>
+    <a class="item" href="#printPrimeNumbers">چاپ اعداد اول</a>
+    <a class="item" href="#factorial">تابع فاکتوریل</a>
+    <a class="item" href="#arrayEqualityFunction">تابع مقایسه تساوی دو آرایه</a>
+    <a class="item" href="#stringEqualityFunction">تابع مقایسه تساوی دو رشته</a>
+    <a class="item" href="#printArrayFunction">تابع نمایش آرایه</a>
+    <a class="item" href="#scanArrayFunction">تابع دریافت آرایه از ورودی</a>
+    <a class="item" href="#reverseArrayFunction">تابع معکوس کردن آرایه</a>
+    <a class="item" href="#sequentialArraySearchFunction">تابع جستجوی خطی در آرایه</a>
+    <a class="item" href="#stringLengthFunction">تابع طول رشته</a>
+    <a class="item" href="#stringReverseFunction">تابع معکوس کردن رشته</a>
+    <a class="item" href="#isLowerUpperCaseCharFunctions">توابع بررسی کوچک یا بزرگ بودن حرف</a>
+    <a class="item" href="#isAlphaDigitCharFunction">توابع بررسی حرف یا عدد بودن کاراکتر</a>
+    <a class="item" href="#charToUpperCaseAndToLowerCaseFunction">توابع تبدیل حرف کوچک به بزرگ و بالعکس</a>
+    <a class="item" href="#stringToLowerCaseToUpperCaseFunction">توابع تبدیل حروف بزرگ به حروف کوچک در رشته و بالعکس</a>
+    <a class="item" href="#stringConcatFunction">تابع الحاق دو رشته</a>
+    <a class="item" href="#countCharFunction">تابع شمارش کاراکتر در رشته</a>
+    <a class="item" href="#firstCharIndexFunction">تابع یافتن اولین اندیس کاراکتر در رشته</a>
+    <a class="item" href="#removeAllCharFunction">تابع حدف کاراکتر از رشته</a>
+    <a class="item" href="#arraySelectionSortFunction">تابع مرتب سازی انتخابی آرایه</a>
+  </div>
+
+    <h4 id="isPrime" class="ui right aligned attached header">
+      <span class="custom-font">
+        تشخیص عدد اول
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          #include &lt;stdio.h&gt;
+
+          int main() {
+              int i, number, isPrime = 1;
+              printf("Enter a number: ");
+              scanf("%d", &number);
+              for (i = 2; i < number; i++)
+                if (number % i == 0) {
+                  isPrime = 0;
+                  break;
+                }
+              if (isPrime)
+                printf("The number is prime!\n");
+              else
+                printf("The number is not prime!\n");
+              return 0;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="isPrimeFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع بررسی اول بودن عدد
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          int is_prime (int number) {
+            int i, isPrime = 1;
+            for (i = 2; i < number; i++)
+              if (number % i == 2) {
+                isPrime = 0;
+                break;
+              }
+            return isPrime;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="printPrimeNumbers" class="ui right aligned attached header">
+      <span class="custom-font">
+        چاپ اعداد اول
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          #include &lt;stdio.h&gt;
+
+          // Defined in above examples
+          int is_prime (int);
+
+          int main() {
+              int i, j, number, isPrime;
+              printf("Enter a number: ");
+              scanf("%d", &number);
+              for (i = 2; i <= number; i++)
+                  if (is_prime(i))
+                      printf("%d\n", i);
+              return 0;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="factorial" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع فاکتوریل
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          int factorial (int number) {
+            int fact_number = 1;
+            for (; number > 1; number--)
+              fact_number *= number;
+            return fact_number;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="arrayEqualityFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع مقایسه تساوی دو آرایه
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+    int are_equal(int first_array[], int second_array[], int length) {
+      int i;
+      for (i = 0; i < length; i++)
+        if (first_array[i] != second_array[i])
+          return 0;
+      return 1;
+    }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="stringEqualityFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع مقایسه تساوی دو رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+  int str_are_equal(const char first_str[], const char second_str[]) {
+    int i;
+    for (i = 0; first_str[i] && second_str[i]; i++)
+      if (first_str[i] != second_str[i])
+        return 0;
+    if (first_str[i] != 0 || second_str[i] != 0)
+      return 0;
+    return 1;
+  }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="printArrayFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع نمایش آرایه
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          void print_array(int ar[], int len) {
+            int i;
+            for (i = 0; i < len; i++)
+              printf("%d\n", ar[i]);
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="scanArrayFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع دریافت آرایه از ورودی
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          void scan_array (int ar[], int len) {
+            int i;
+            for (i = 0; i < len; i++)
+              scanf("%d", &ar[i]);
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="reverseArrayFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع معکوس کردن آرایه
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          void reverse_array (int ar[], int len) {
+            int i, temp;
+            for (i = 0; i < len / 2; i++) {
+              temp = ar[i];
+              ar[i] = ar[len - i - 1];
+              ar[len - i - 1] = temp;
+            }
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="sequentialArraySearchFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع جستجوی خطی در آرایه
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+      // Returns -1 if value not found in array
+      int sequential_array_search (int ar[], int len, int value) {
+        int i;
+        for (i = 0; i < len; i++)
+          if (ar[i] == value)
+            return i;
+        return -1;
+      }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="stringLengthFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع طول رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          int str_len (const char str[]) {
+            int len;
+            for (len = 0; str[len] != 0; len++);
+            return len;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="stringReverseFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع معکوس کردن رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          // Defined in above examples
+          int str_len (const char[]);
+
+          void str_reverse(char str[]) {
+            int i, len = str_len(str);
+            char temp;
+            for (i = 0; i < len / 2; i++) {
+              temp = str[i];
+              str[i] = str[len - i - 1];
+              str[len - i - 1] = temp;
+            }
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="isLowerUpperCaseCharFunctions" class="ui right aligned attached header">
+      <span class="custom-font">
+        توابع بررسی کوچک یا بزرگ بودن حرف
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          int is_lower_case(const char letter) {
+            // if ( 97 <= letter && letter <= 122)
+            if ('a' <= letter && letter <= 'z')
+              return 1;
+            return 0;
+          }
+
+          int is_upper_case(const char letter) {
+            // if ( 65 <= letter && letter <= 90)
+            if ('A' <= letter && letter <= 'Z')
+              return 1;
+            return 0;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="isAlphaDigitCharFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        توابع بررسی حرف یا عدد بودن کاراکتر
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          // Defined in above examples
+          int is_lower_case(const char);
+          int is_upper_case(const char);
+
+          int is_alpha(const char letter) {
+            if (is_lower_case(letter) || is_upper_case(letter))
+              return 1;
+            return 0;
+          }
+
+          int is_digit(const char letter) {
+            // if ( 48 <= letter && letter <= 57)
+            if ('0' <= letter && letter <= '9')
+              return 1;
+            return 0;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="charToUpperCaseAndToLowerCaseFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+         توابع تبدیل حرف کوچک به بزرگ و بالعکس
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          // Defined in above examples
+          int is_upper_case(const char);
+
+          char to_lower_case(const char letter) {
+            if (is_upper_case(letter))
+              // return letter + ('a' - 'A');
+              return letter + 32;
+            return letter;
+          }
+
+          // Defined in above examples
+          int is_lower_case(const char);
+
+          char to_upper_case(const char letter) {
+            if (is_lower_case(letter))
+              // return letter - ('a' - 'A');
+              return letter - 32;
+            return letter;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="stringToLowerCaseToUpperCaseFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        توابع تبدیل حروف بزرگ به حروف کوچک در رشته و بالعکس
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          // Defined in above examples
+          char to_lower_case (const char);
+
+          void str_to_lower_case (char str[]) {
+            int i;
+            for (i = 0; str[i] != 0; i++)
+              str[i] = to_lower_case(str[i]);
+          }
+
+          // Defined in above examples
+          char to_upper_case (const char);
+
+          void str_to_upper_case (char str[]) {
+            int i;
+            for (i = 0; str[i] != 0; i++)
+              str[i] = to_upper_case(str[i]);
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="stringConcatFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع الحاق دو رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+      // Defined in above examples
+      int str_len (const char);
+
+      void str_concat (char first_str[], char second_str[]) {
+          int i, len;
+          for (i = 0, len = str_len(first_str) ; second_str[i]; i++)
+              first_str[len + i] = second_str[i];
+          first_str[len + i] = '\0';
+      }
+
+      /*
+      * char str[] = "Hello ";
+      * str_concat(str, "world!");
+      * printf("%s", str); // Output ---> "Hello world!";
+      */
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="countCharFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع شمارش کاراکتر در رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          int count_char(const char * str, const char c) {
+              int char_counts = 0;
+              for (int index = 0; str[index]; index++)
+                  if (str[index] == c)
+                      char_counts++;
+              return char_counts;
+          }
+        </code>
+      </pre>
+    </div>
+
+<h4 id="firstCharIndexFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع یافتن اولین اندیس کاراکتر در رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          // Returns -1 if not found
+          int first_char_index (const char * str, const char c ) {
+              for (int index = 0; str[index]; index++)
+                  if (str[index] == c)
+                      return index;
+              return -1;
+          }
+        </code>
+      </pre>
+    </div>
+
+<h4 id="removeAllCharFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع حدف کاراکتر از رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+        // Defined in above examples
+        int  first_char_index (const char *, const char);
+
+        // Returns number of removals
+        int remove_all_char (char * str, const char c) {
+            int remove_counts = 0;
+            for (int index = first_char_index(str, c); index != -1;
+                 index = first_char_index(str, c), remove_counts++)
+                for (int i = index; str[i]; i++)
+                    str[i] = str[i + 1];
+            return remove_counts;
+        }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="arraySelectionSortFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع مرتب سازی انتخابی آرایه
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+  // order = 0 for Ascending and order = 1 for Descending
+  void array_sort(int * a, int len, int order) {
+    for (int i = 0; i < len - 1; i++)
+      for (int j = i + 1; j < len; j++)
+            if ((a[i] > a[j] && !order) || (a[i] < a[j] && order) ) {
+              int temp = a[i];
+              a[i] = a[j];
+              a[j] = temp;
+            }
+  }
+        </code>
+      </pre>
+    </div>
+
+    <h4 class="ui bottom attached center aligned header" style="border-radius: 0px;">
+     <a href="http://mahdavipanah.com" target="_blank">
+              <span class="custom-font">حمیدرضا مهدوی‌پناه</span>
+            </a>
+    </h4>
+</div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-58510559-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</body>
+
+</html>
