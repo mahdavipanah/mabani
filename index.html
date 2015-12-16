@@ -104,6 +104,7 @@
     <a class="item" href="#firstCharIndexFunction">تابع یافتن اولین اندیس کاراکتر در رشته</a>
     <a class="item" href="#removeAllCharFunction">تابع حدف کاراکتر از رشته</a>
     <a class="item" href="#arraySelectionSortFunction">تابع مرتب سازی انتخابی آرایه</a>
+    <a class="item" href="#stringToUIntFunction">تابع تبدیل رشته به عدد طبیعی</a>
   </div>
 
     <h4 id="isPrime" class="ui right aligned attached header">
@@ -575,6 +576,26 @@
               a[j] = temp;
             }
   }
+        </code>
+      </pre>
+    </div>
+    <h4 id="stringToUIntFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع تبدیل رشته به عدد طبیعی
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          #include &lt;math.h&gt;
+
+          // String must contain numeric characters (1...9)
+          unsigned int str_to_uint(const char * str) {
+              unsigned int ret_val = 0;
+              for (int i = 0; str[i]; i++)
+                  ret_val += pow(10, i) * (str[i] - 48);
+              return ret_val;
+          }
         </code>
       </pre>
     </div>
