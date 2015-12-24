@@ -80,7 +80,7 @@
         &zwnj;&zwnj;&zwnj;&zwnj;<br>
         h.mahdavipanah@gmail.com
         <br />
-        این صفحه و پروژه متن باز و آزاد است و میتونید از آدرس زیر به سورس اون دسترسی داشته باشید        
+        این صفحه و پروژه متن باز و آزاد است و میتونید از آدرس زیر به سورس اون دسترسی داشته باشید
         ‌<br />
         <a target="_blank" href="https://github.com/mahdavipanah/mabani/">github.com/mahdavipanah/mabani</a>
     </span>
@@ -110,6 +110,7 @@
     <a class="item" href="#arraySelectionSortFunction">تابع مرتب سازی انتخابی آرایه</a>
     <a class="item" href="#stringToUIntFunction">تابع تبدیل رشته به عدد طبیعی</a>
     <a class="item" href="#stringToIntFunction">تابع تبدیل رشته به عدد صحیح</a>
+    <a class="item" href="#matrixIsDiagonalFunction">  تابع بررسی قطری بودن ماتریس</a>
   </div>
 
     <h4 id="isPrime" class="ui right aligned attached header">
@@ -635,6 +636,26 @@
               if (!is_positive)
                 ret_val *= -1;
               return ret_val;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="matrixIsDiagonalFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع بررسی قطری بودن ماتریس
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          int matrix_is_diagonal(int ** matrix, int n) {
+            for (int i = 1; i < n; i++)
+              for (int j = 0; j != i; j++)
+                if (matrix[i][j] != 0
+                    || matrix [j][i] != 0)
+                    return 0;
+            return 1;
           }
         </code>
       </pre>
