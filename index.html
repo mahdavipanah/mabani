@@ -110,7 +110,8 @@
     <a class="item" href="#arraySelectionSortFunction">تابع مرتب سازی انتخابی آرایه</a>
     <a class="item" href="#stringToUIntFunction">تابع تبدیل رشته به عدد طبیعی</a>
     <a class="item" href="#stringToIntFunction">تابع تبدیل رشته به عدد صحیح</a>
-    <a class="item" href="#matrixIsDiagonalFunction">  تابع بررسی قطری بودن ماتریس</a>
+    <a class="item" href="#matrixIsDiagonalFunction">تابع بررسی قطری بودن ماتریس</a>
+    <a class="item" href="#matrixRotate90DegCWFunction">تابع چرخش ۹۰ درجه‌ای ساعتگرد ماتریس</a>
   </div>
 
     <h4 id="isPrime" class="ui right aligned attached header">
@@ -649,6 +650,7 @@
     <div class="ui attached code segment">
       <pre>
         <code class="C++ hljs objectivec">
+          // Gets a square matrix and it's n (matrix is n * n)
           int matrix_is_diagonal(int ** matrix, int n) {
             for (int i = 1; i < n; i++)
               for (int j = 0; j != i; j++)
@@ -656,6 +658,29 @@
                     || matrix [j][i] != 0)
                     return 0;
             return 1;
+          }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="matrixRotate90DegCWFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+      تابع چرخش ۹۰ درجه‌ای ساعتگرد ماتریس
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          // Gets a square matrix and it's n (matrix is n * n)
+          void matrix_rotate_90_degree_clockwise
+                      (int ** matrix, int n) {
+            int temp_matrix[n][n];
+            for (int i = 0; i < n; i++)
+              for (int j = 0; j < n; j++)
+                temp_matrix[j][n-i-1] = matrix[i][j];
+            for (int i = 0; i < n; i++)
+              for (int j = 0; j < n; j++)
+                matrix[i][j] = temp_matrix[i][j];
           }
         </code>
       </pre>
