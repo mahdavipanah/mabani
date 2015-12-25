@@ -110,6 +110,7 @@
     <a class="item" href="#arraySelectionSortFunction">تابع مرتب سازی انتخابی آرایه</a>
     <a class="item" href="#stringToUIntFunction">تابع تبدیل رشته به عدد طبیعی</a>
     <a class="item" href="#stringToIntFunction">تابع تبدیل رشته به عدد صحیح</a>
+    <a class="item" href="#UIntToStrFunction">تابع تبدیل عدد طبیعی به رشته</a>
     <a class="item" href="#matrixIsDiagonalFunction">تابع بررسی قطری بودن ماتریس</a>
     <a class="item" href="#matrixRotate90DegCWFunction">تابع چرخش ۹۰ درجه‌ای ساعتگرد ماتریس</a>
   </div>
@@ -638,6 +639,52 @@
                 ret_val *= -1;
               return ret_val;
           }
+        </code>
+      </pre>
+    </div>
+
+    <h4 id="UIntToStrFunction" class="ui right aligned attached header">
+      <span class="custom-font">
+        تابع تبدیل عدد طبیعی به رشته
+      </span>
+    </h4>
+    <div class="ui attached code segment">
+      <pre>
+        <code class="C++ hljs objectivec">
+          void uint_to_str(char * str, int strlen,
+                           unsigned int num) {
+              if (!strlen) return;
+              if (strlen == 1) {
+                  str = 0;
+                  return;
+              }
+              if (!num) {
+                  *(str++) = '0';
+                  *str = 0;
+              }
+              else {
+                  int i = 1;
+                  do {
+                      int digit = num % 10;
+                      num /= 10;
+                      *(str++) = digit + 48;
+                      ++i;
+                  } while (num && i < strlen);
+                  *(str--) = 0;
+                  for (char * swap = str - (i - 2);
+                       swap < str; ++swap, --str) {
+                      char temp = *swap;
+                      *swap = *str;
+                      *str = temp;
+                  }
+              }
+          }
+          /*
+          *   char str[10];
+          *   int num = 234;
+          *   uint_to_str(str, 10, num);
+          *   printf("%s\n", str) // Output: 234
+          */
         </code>
       </pre>
     </div>
